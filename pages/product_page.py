@@ -6,8 +6,6 @@ class ProductPage(BasePage):
         self.guest_can_add_product()
         self.solve_quiz_and_get_code()
         self.message_basket_correct()
-        self.should_message_disappear()
-        self.should_not_be_message()
 
     def guest_can_add_product(self):
         self.browser.find_element(*ProductPageLocators.ADD_BASKET).click()
