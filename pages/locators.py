@@ -13,3 +13,4 @@ class ProductPageLocators():
     BOOK_NAME = (By.XPATH, "//div[contains(@class,'product_main')]/h1")
     INFO_TEXT = (By.XPATH, "//*[@id='messages']/div[contains(@class,'alert-info')]")
     PRICE_TEXT = (By.XPATH, "//div[contains(@class,'product_main')]/p[contains(@class,'price_color')]")
+    MESSAGE_BOX = (By.XPATH,"//*[@id='messages'']/div[1]")
