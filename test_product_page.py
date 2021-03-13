@@ -7,6 +7,7 @@ from .pages.basket_page import BasketPage
 from .pages.login_page import LoginPage
 
 #Проверяем на 10 разных страницах, упадет тест или нет
+@pytest.mark.need_review
 @pytest.mark.parametrize('part_link',["0","1","2","3","4","5","6",pytest.param("7", marks=pytest.mark.xfail),"8","9"])
 def test_guest_can_add_product_to_basket_offer_numbers(part_link,browser):
     link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{part_link}'
@@ -16,7 +17,6 @@ def test_guest_can_add_product_to_basket_offer_numbers(part_link,browser):
     product_page.guest_can_add_product_to_basket()
 
 #Проверка добавления в корзину, должны быть сообщения об удачной корзине и название с ценой совпадают, с добавленными
-@pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     page = MainPage(browser,link)
@@ -110,5 +110,5 @@ class TestUserAddToBasketFromProductPage:
         page = MainPage(browser, link)
         page.open()
         product_page = ProductPage(browser, browser.current_url)
-        product_page.guest_can_add_product_to_basket()
+        product_page.guest_can_add_product_to_baskets()
 

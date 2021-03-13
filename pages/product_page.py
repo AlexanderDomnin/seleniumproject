@@ -5,7 +5,11 @@ from .locators import ProductPageLocators
 class ProductPage(BasePage):
     def guest_can_add_product_to_basket(self): # гость может добавитбь товар в корзину
         self.guest_can_add_product()
-        #self.solve_quiz_and_get_code()
+        self.solve_quiz_and_get_code()
+        self.message_basket_correct()
+
+    def guest_can_add_product_to_baskets(self): # гость может добавитбь товар в корзину без оффера
+        self.guest_can_add_product()
         self.message_basket_correct()
 
     def guest_can_add_product(self): # добавить в корзину гостем
