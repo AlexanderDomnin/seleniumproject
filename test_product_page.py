@@ -1,7 +1,10 @@
+#Тесты с страницей товара в корзине
 import pytest
+import time
 from .pages.main_page import MainPage
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
 
 #Проверяем на 10 разных страницах, упадет тест или нет
 @pytest.mark.parametrize('part_link',["0","1","2","3","4","5","6",pytest.param("7", marks=pytest.mark.xfail),"8","9"])
@@ -78,3 +81,33 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page = BasketPage(browser,browser.current_url)
     basket_page.should_not_items()
     basket_page.should_message_in_basket()
+
+@pytest.mark.stepi
+class TestUserAddToBasketFromProductPage:
+    #сетап
+    @pytest.fixture(scope="function",autouse=True)
+    def setup(self,browser):
+        link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+        email = str(time.time()) + "@fakemail.org"
+        password = str(time.time())
+        self.page = LoginPage(browser, link)
+        self.page.open()
+        self.page.register_new_user(email=email, password=password)
+        self.page.should_be_authorized_user()
+
+    # Проверка, что на странице, нет сообщения о удачном добавлении в корзину, без добавления в корзину
+    def test_user_cant_see_success_message(self,browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = MainPage(browser, link)
+        page.open()
+        guest_cant = ProductPage(browser, browser.current_url)
+        guest_cant.should_not_be_message()
+
+    # Проверка добавления в корзину, должны быть сообщения об удачной корзине и название с ценой совпадают, с добавленными
+    def test_user_can_add_product_to_basket(self,browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = MainPage(browser, link)
+        page.open()
+        product_page = ProductPage(browser, browser.current_url)
+        product_page.guest_can_add_product_to_basket()
+
