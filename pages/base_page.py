@@ -18,7 +18,6 @@ class BasePage():
 
     def go_to_login_page(self): # Кликнуть на вход или регистрацию
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
-        # return LoginPage(browser=self.browser, url=self.browser.current_url)
 
     def is_disappeared(self, how, what, timeout=4): # ПРоверить что элемент исчез через заданное время
         try:
