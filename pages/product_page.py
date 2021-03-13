@@ -1,4 +1,4 @@
-# методы для корзины
+# методы для страницы добавления товара в корзину
 from .base_page import BasePage
 from .locators import ProductPageLocators
 

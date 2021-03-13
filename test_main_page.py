@@ -4,7 +4,6 @@ from .pages.login_page import LoginPage
 from .pages.basket_page import BasketPage
 import pytest
 
-
 #Проверяем что переход по ссылке логина, ведет на корректную страницу с формами
 def test_guest_should_see_login_page(browser):
     link="http://selenium1py.pythonanywhere.com/"
