@@ -1,8 +1,20 @@
+import pytest
 from .pages.main_page import MainPage
 from .pages.product_page import ProductPage
 
+@pytest.mark.parametrize('part_link',["0","1","2","3","4","5","6",pytest.param("7", marks=pytest.mark.xfail),"8","9"])
+def test_guest_can_add_product_to_basket_offer_numbers(part_link,browser):
+    link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{part_link}'
+    page = MainPage(browser,link)
+    page.open()
+    product_page = ProductPage(browser,browser.current_url)
+    product_page.guest_can_add_product_to_basket()
+
+
+
+
 def test_guest_can_add_product_to_basket(browser):
-    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019.'
+    link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019.'
     page = MainPage(browser,link)
     page.open()
     product_page = ProductPage(browser,browser.current_url)
