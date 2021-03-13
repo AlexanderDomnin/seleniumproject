@@ -9,7 +9,7 @@ from .pages.login_page import LoginPage
 #Проверяем на 10 разных страницах, упадет тест или нет
 @pytest.mark.need_review
 @pytest.mark.parametrize('part_link',["0","1","2","3","4","5","6",pytest.param("7", marks=pytest.mark.xfail),"8","9"])
-def test_guest_can_add_product_to_basket_offer_numbers(part_link,browser):
+def test_guest_can_add_product_to_basket(part_link,browser):
     link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{part_link}'
     page = MainPage(browser,link)
     page.open()
@@ -17,7 +17,7 @@ def test_guest_can_add_product_to_basket_offer_numbers(part_link,browser):
     product_page.guest_can_add_product_to_basket()
 
 #Проверка добавления в корзину, должны быть сообщения об удачной корзине и название с ценой совпадают, с добавленными
-def test_guest_can_add_product_to_basket(browser):
+def test_guest_can_add_product_to_basket_off(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     page = MainPage(browser,link)
     page.open()
