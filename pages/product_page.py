@@ -6,6 +6,8 @@ class ProductPage(BasePage):
         self.guest_can_add_product()
         self.solve_quiz_and_get_code()
         self.message_basket_correct()
+        self.should_message_disappear()
+        self.should_not_be_message()
 
     def guest_can_add_product(self):
         self.browser.find_element(*ProductPageLocators.ADD_BASKET).click()
@@ -15,3 +17,9 @@ class ProductPage(BasePage):
         assert self.browser.find_element(*ProductPageLocators.BOOK_NAME).text  == self.browser.find_element(*ProductPageLocators.MESSAGE_TEXT).text, "The title of the book does not match the one added to the cart"
         assert self.is_element_present(*ProductPageLocators.INFO_TEXT), "No success message"
         assert self.browser.find_element(*ProductPageLocators.PRICE_TEXT).text in self.browser.find_element(*ProductPageLocators.INFO_TEXT).text, "The price of the book does not match the one added to the cart"
+
+    def should_not_be_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_TEXT),"Success message is presented, but should not be"
+
+    def should_message_disappear(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_TEXT),"Success message is presented, but should not be!"
